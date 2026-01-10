@@ -1,13 +1,15 @@
 backend:
   name: github
-  repo: DIRKOPRO1999/web-fundepovu # <--- ¡CAMBIA ESTO POR TU REPO REAL! (ej: usuario/proyecto)
+  repo: DIRKOPRO1999/web-fundepovul # ⚠️ CONFIRMA QUE ESTE SEA TU REPO EXACTO
   branch: main
-  # IMPORTANTE: Cloudflare Pages necesita un servidor OAuth externo.
-  # Si tienes un worker, pon la URL aquí (ej: https://auth.tudominio.com)
-  base_url: https://tu-worker-de-oauth.workers.dev 
+  base_url: https://oauth-fundepovul.sucre19992.workers.dev
+  auth_endpoint: auth
 
 media_folder: "src/img"
 public_folder: "/img"
+
+# Esto permite previsualizar los estilos reales
+site_url: https://web-fundepovul.pages.dev
 
 collections:
   - name: "paginas"
@@ -18,19 +20,19 @@ collections:
         name: "inicio"
         fields:
           - {label: "--- SECCIÓN HERO ---", name: "hero_header", widget: "object", fields: [
-              {label: "Título Principal (Soporta HTML)", name: "titulo", widget: "string"},
+              {label: "Título Principal", name: "titulo", widget: "string"},
               {label: "Descripción", name: "descripcion", widget: "text"},
               {label: "Texto Botón", name: "btn_primary", widget: "string"},
               {label: "Imagen Portada", name: "imagen", widget: "image"}
             ]}
-            
-          - {label: "--- EJES DE ACCIÓN (Proyectos) ---", name: "ejes", widget: "list", fields: [
-              {label: "Icono (Material Symbols)", name: "icono", widget: "string", default: "star", hint: "Busca nombres en fonts.google.com/icons"},
-              {label: "Título del Eje", name: "titulo", widget: "string"},
-              {label: "Descripción Corta", name: "descripcion", widget: "text"}
+          
+          - {label: "--- EJES DE ACCIÓN ---", name: "ejes", widget: "list", fields: [
+              {label: "Icono (Material Symbols)", name: "icono", widget: "string"},
+              {label: "Título", name: "titulo", widget: "string"},
+              {label: "Descripción", name: "descripcion", widget: "text"}
             ]}
 
-          - {label: "--- INFO LEGAL ---", name: "legal", widget: "object", fields: [
+          - {label: "--- LEGAL ---", name: "legal", widget: "object", fields: [
               {label: "NIT", name: "nit", widget: "string"},
               {label: "Matrícula", name: "matricula", widget: "string"},
               {label: "Representante", name: "representante", widget: "string"}
