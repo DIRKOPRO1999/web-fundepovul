@@ -60,3 +60,4 @@ collections:
               - {label: "Título del Eje", name: "titulo", widget: "string"}
               - {label: "Descripción Corta", name: "descripcion", widget: "text"}
               - {label: "Icono (Material Symbols)", name: "icono", widget: "string", hint: "Busca nombres en fonts.google.com/icons"}
+
