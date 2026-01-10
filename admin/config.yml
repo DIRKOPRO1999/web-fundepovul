@@ -3,8 +3,9 @@ backend:
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
   # Usar Pages Functions internas para OAuth.
-  base_url: https://web-fundepovul.pages.dev/functions/oauth
-  auth_endpoint: auth
+  # Cloudflare Pages Functions mapea: functions/oauth/auth.js → /oauth/auth
+  base_url: https://web-fundepovul.pages.dev
+  auth_endpoint: oauth/auth
 
 # Configuración de imágenes
 media_folder: "src/img"
@@ -61,5 +62,3 @@ collections:
               - {label: "Título del Eje", name: "titulo", widget: "string"}
               - {label: "Descripción Corta", name: "descripcion", widget: "text"}
               - {label: "Icono (Material Symbols)", name: "icono", widget: "string", hint: "Busca nombres en fonts.google.com/icons"}
-
-
