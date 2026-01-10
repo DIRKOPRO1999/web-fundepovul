@@ -85,10 +85,24 @@ export async function onRequest(context) {
           const message = token 
             ? { type: 'decap-oauth', provider: 'github', token: token, status: 'success' }
             : { type: 'decap-oauth', provider: 'github', error: error || 'unknown_error', status: 'error' };
-          
+
+          // Enviar objeto (nuevo formato)
           window.opener.postMessage(message, origin);
+
+          // Enviar también formato legacy STRING que algunos frontends (o versiones antiguas)
+          // esperan: 'authorization:provider:status:JSON'
+          try {
+            const legacyPayload = token ? JSON.stringify({ token: token }) : JSON.stringify({ error: error || 'unknown_error' });
+            const legacyMessage = token
+              ? 'authorization:github:success:' + legacyPayload
+              : 'authorization:github:error:' + legacyPayload;
+            window.opener.postMessage(legacyMessage, origin);
+          } catch (e) {
+            // ignore
+          }
+
           window.opener.focus && window.opener.focus();
-          
+
           // Intentar cerrar la ventana después de un pequeño delay
           setTimeout(() => { window.close(); }, 500);
         } else {
