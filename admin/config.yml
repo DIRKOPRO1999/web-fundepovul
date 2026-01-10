@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main # O 'master', dependiendo de tu repositorio
+
+media_folder: "img" # Donde se guardarán las fotos que suba ella
+public_folder: "img"
+
+collections:
+  - name: "paginas"
+    label: "Páginas"
+    files:
+      - file: "index.html"
+        label: "Página de Inicio"
+        name: "inicio"
+        fields:
+          - {label: "Título Principal", name: "hero_titulo", widget: "string"}
+          - {label: "Descripción Principal", name: "hero_desc", widget: "text"}
+          - {label: "Imagen de Portada", name: "hero_imagen", widget: "image"}
+          - {label: "NIT", name: "info_nit", widget: "string"}
+          - {label: "Matrícula", name: "info_matricula", widget: "string"}
+          - {label: "Representante Legal", name: "info_rep", widget: "string"}
+          - {label: "Teléfono", name: "info_tel", widget: "string"}
+          - {label: "Email", name: "info_email", widget: "string"}
+          - {label: "Dirección", name: "info_dir", widget: "string"}
