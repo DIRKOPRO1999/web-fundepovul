@@ -1,14 +1,13 @@
 backend:
   name: github
-  repo: DIRKOPRO1999/web-fundepovul # ⚠️ CONFIRMA QUE ESTE SEA TU REPO EXACTO
+  repo: DIRKOPRO1999/web-fundepovul # <--- Asegúrate que este sea tu usuario/repo correcto
   branch: main
+  # ⚠️ AQUÍ ESTABA EL ERROR. ESTA ES TU URL REAL:
   base_url: https://oauth-fundepovul.sucre19992.workers.dev
   auth_endpoint: auth
 
 media_folder: "src/img"
 public_folder: "/img"
-
-# Esto permite previsualizar los estilos reales
 site_url: https://web-fundepovul.pages.dev
 
 collections:
