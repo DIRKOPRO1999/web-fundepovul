@@ -1,11 +1,23 @@
 paths:
-  static: ''
   uploads: uploads
+  static: ''
 timezone: America/Bogota
 markdown:
   engine: commonmark
-  options: {}
-collections_config:
-  pages:
-    path: ''
-    icon: wysiwyg
+  options:
+    xhtml: false
+    breaks: false
+    linkify: false
+    typographer: false
+    spaced_lists: false
+    sentence_per_line: false
+    gfm: false
+    code_block_fences: '```'
+    escape_snippets_in_code_blocks: false
+    treat_indentation_as_code: false
+    table: false
+    strikethrough: false
+    subscript: false
+    superscript: false
+    heading_ids: false
+    attributes: false
