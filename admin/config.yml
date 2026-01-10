@@ -1,24 +1,31 @@
 backend:
   name: git-gateway
-  branch: main # O 'master', dependiendo de tu repositorio
+  branch: main
 
-media_folder: "img" # Donde se guardarán las fotos que suba ella
-public_folder: "img"
+media_folder: "src/img"
+public_folder: "/img"
 
 collections:
   - name: "paginas"
     label: "Páginas"
     files:
-      - file: "index.html"
+      - file: "src/_data/home.json" # <--- EL SECRETO: Editamos datos, no HTML
         label: "Página de Inicio"
         name: "inicio"
         fields:
-          - {label: "Título Principal", name: "hero_titulo", widget: "string"}
-          - {label: "Descripción Principal", name: "hero_desc", widget: "text"}
-          - {label: "Imagen de Portada", name: "hero_imagen", widget: "image"}
-          - {label: "NIT", name: "info_nit", widget: "string"}
-          - {label: "Matrícula", name: "info_matricula", widget: "string"}
-          - {label: "Representante Legal", name: "info_rep", widget: "string"}
-          - {label: "Teléfono", name: "info_tel", widget: "string"}
-          - {label: "Email", name: "info_email", widget: "string"}
-          - {label: "Dirección", name: "info_dir", widget: "string"}
+          - {label: "--- SECCIÓN HERO ---", name: "hero_header", widget: "object", fields: [
+              {label: "Título Principal", name: "titulo", widget: "string"},
+              {label: "Descripción", name: "descripcion", widget: "text"},
+              {label: "Texto Botón Principal", name: "btn_primary", widget: "string", default: "Nuestra Labor"},
+              {label: "Imagen de Portada", name: "imagen", widget: "image"}
+            ]}
+          - {label: "--- INFO LEGAL ---", name: "legal", widget: "object", fields: [
+              {label: "NIT", name: "nit", widget: "string"},
+              {label: "Matrícula Mercantil", name: "matricula", widget: "string"},
+              {label: "Representante Legal", name: "representante", widget: "string"}
+            ]}
+          - {label: "--- CONTACTO ---", name: "contacto", widget: "object", fields: [
+              {label: "Teléfono", name: "telefono", widget: "string"},
+              {label: "Email", name: "email", widget: "string"},
+              {label: "Dirección", name: "direccion", widget: "string"}
+            ]}
