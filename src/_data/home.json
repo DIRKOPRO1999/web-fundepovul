@@ -14,5 +14,27 @@
     "telefono": "(+57) 302 466 5407",
     "email": "fundepovul@gmail.com",
     "direccion": "CR 2 # 20-21, Barrio Siete de Marzo. Sucre, Sucre, Colombia."
-  }
+  },
+  "ejes": [
+    {
+      "titulo": "Educación",
+      "descripcion": "Talleres, capacitaciones y seminarios para elevar la calidad educativa.",
+      "icono": "school"
+    },
+    {
+      "titulo": "Desarrollo Social",
+      "descripcion": "Apoyo a mujeres cabeza de hogar, víctimas del conflicto y población vulnerable.",
+      "icono": "diversity_1"
+    },
+    {
+      "titulo": "Medio Ambiente",
+      "descripcion": "Proyectos de reforestación y saneamiento ambiental.",
+      "icono": "potted_plant"
+    },
+    {
+      "titulo": "Cultura y Deporte",
+      "descripcion": "Escuelas deportivas y preservación del patrimonio cultural.",
+      "icono": "sports_soccer"
+    }
+  ]
 }
