@@ -124,34 +124,46 @@ ul { list-style: none; }
 }
 
 /* ---------------------------------------------------------
-   3. HEADER FLOTANTE (Glassmorphism)
+   3. HEADER FLOTANTE (CORREGIDO Y CENTRADO)
    --------------------------------------------------------- */
 header {
     position: fixed;
     top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
+    
+    /* NUEVO MÉTODO DE CENTRADO ROBUSTO */
+    left: 0;
+    right: 0;
+    margin: 0 auto; /* Esto obliga al navegador a centrarlo perfectamente */
+    
+    width: 95%; /* Un poco más de espacio a los lados */
     max-width: 1200px;
-    background: rgba(253, 252, 248, 0.85);
+    
+    background: rgba(253, 252, 248, 0.9); /* Un poco más opaco para leer mejor */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: var(--radius-full);
-    padding: 12px 24px;
+    
+    padding: 12px 32px; /* Más espacio interno para que el texto respire */
+    
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: var(--shadow-1);
     transition: all 0.3s ease;
+    
+    /* Asegura que el padding no aumente el tamaño total */
+    box-sizing: border-box; 
 }
 
-/* Estado cuando se hace scroll (controlado por JS) */
+/* Estado cuando se hace scroll */
 header.scrolled {
-    background: rgba(253, 252, 248, 0.95);
+    background: rgba(253, 252, 248, 0.98);
     box-shadow: var(--shadow-2);
-    padding: 10px 24px; /* Se compacta un poco */
+    top: 10px; /* Se pega un poquito más arriba al bajar */
+    padding: 10px 32px;
 }
 
 .logo-container {
