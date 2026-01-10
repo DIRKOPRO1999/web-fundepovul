@@ -1,33 +1,31 @@
 module.exports = function(eleventyConfig) {
   
   // 1. COPIA DE ARCHIVOS ESTÁTICOS (Passthrough Copy)
-  // Esto le dice a Eleventy que copie estas carpetas directamente al resultado final (_site)
-  // sin intentar procesarlas como plantillas.
+  // Estas líneas aseguran que Eleventy copie tus estilos e imágenes al sitio final
+  // Sin esto, el navegador no encuentra el diseño "Golden Hour"
   eleventyConfig.addPassthroughCopy("src/css");
-  eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("admin");
 
-  // 2. CONFIGURACIÓN DE NUNJUCKS
-  // Permite que usemos lógica avanzada y datos del CMS en el HTML
+  // 2. CONFIGURACIÓN DE MOTORES DE PLANTILLAS
+  // Establecemos Nunjucks (.njk) como el motor para procesar HTML y datos
   eleventyConfig.setTemplateFormats(["njk", "md", "html"]);
   
-  // 3. WATCH TARGETS
-  // Hace que el servidor de desarrollo se refresque si cambias el CSS o JS
+  // 3. OBSERVACIÓN DE CAMBIOS (Watch Targets)
+  // Si haces cambios en el CSS, el servidor los detectará automáticamente
   eleventyConfig.addWatchTarget("./src/css/");
-  eleventyConfig.addWatchTarget("./src/js/");
 
-  // 4. CONFIGURACIÓN DE DIRECTORIOS
+  // 4. ESTRUCTURA DE DIRECTORIOS
   return {
     dir: {
-      input: "src",          // Donde escribes el código
-      includes: "_includes", // Donde viven los layouts (base.njk)
-      data: "_data",         // Donde vive home.json (los datos del CMS)
-      output: "_site"        // Donde Netlify buscará el sitio listo
+      input: "src",          // Carpeta donde trabajas
+      includes: "_includes", // Donde está base.njk
+      data: "_data",         // Donde está home.json
+      output: "_site"        // Carpeta que Cloudflare publicará
     },
-    // Definimos que el motor principal para todo sea Nunjucks
+    // Forzamos que todo el HTML se procese con Nunjucks para usar las variables del CMS
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk",
+    dataTemplateEngine: "njk"
   };
 };
