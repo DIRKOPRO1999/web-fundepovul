@@ -1,29 +1,28 @@
 module.exports = function(eleventyConfig) {
   
   // 1. COPIA DE ARCHIVOS ESTÁTICOS (Passthrough Copy)
-  // Estas líneas aseguran que Eleventy copie tus estilos e imágenes al sitio final
-  // Sin esto, el navegador no encuentra el diseño "Golden Hour"
+  // Agregamos "src/js" para que tus scripts pasen al sitio final
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/img");
+  eleventyConfig.addPassthroughCopy("src/js"); // <--- NUEVO: Copia los scripts
   eleventyConfig.addPassthroughCopy("admin");
 
   // 2. CONFIGURACIÓN DE MOTORES DE PLANTILLAS
-  // Establecemos Nunjucks (.njk) como el motor para procesar HTML y datos
   eleventyConfig.setTemplateFormats(["njk", "md", "html"]);
   
   // 3. OBSERVACIÓN DE CAMBIOS (Watch Targets)
-  // Si haces cambios en el CSS, el servidor los detectará automáticamente
+  // Si modificas JS o CSS, el navegador se refrescará
   eleventyConfig.addWatchTarget("./src/css/");
+  eleventyConfig.addWatchTarget("./src/js/"); // <--- NUEVO: Vigila cambios en JS
 
   // 4. ESTRUCTURA DE DIRECTORIOS
   return {
     dir: {
-      input: "src",          // Carpeta donde trabajas
-      includes: "_includes", // Donde está base.njk
-      data: "_data",         // Donde está home.json
-      output: "_site"        // Carpeta que Cloudflare publicará
+      input: "src",          
+      includes: "_includes", 
+      data: "_data",         
+      output: "_site"        
     },
-    // Forzamos que todo el HTML se procese con Nunjucks para usar las variables del CMS
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk"
