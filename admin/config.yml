@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: TU_USUARIO/TU_REPOSITORIO # Ejemplo: juancarlos/fundepovul-web
   branch: main
+  base_url: https://tudominio.com # Opcional, ponlo cuando tengas el dominio final
+  auth_endpoint: https://tu-worker-de-auth.workers.dev # Te explicaré esto abajo
 
 media_folder: "src/img"
 public_folder: "/img"
@@ -29,3 +32,4 @@ collections:
               {label: "Email", name: "email", widget: "string"},
               {label: "Dirección", name: "direccion", widget: "string"}
             ]}
+
