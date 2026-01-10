@@ -12,76 +12,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <link rel="stylesheet" href="/css/style.css">
-
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <meta name="description" content="Fundación Defensora de Poblaciones Vulnerables en Sucre. Proyectos sociales, educativos y ambientales.">
 </head>
 <body>
 
     {{ content | safe }}
 
-    <script>
-        // Animación de aparición (Reveal) al bajar con el scroll
-        const revealElements = document.querySelectorAll('.reveal');
-
-        const revealOnScroll = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        });
-
-        revealElements.forEach((el) => revealOnScroll.observe(el));
-
-        // Efecto Ripple (Ondita) en los botones al hacer clic
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                let x = e.clientX - e.target.offsetLeft;
-                let y = e.clientY - e.target.offsetTop;
-
-                let ripples = document.createElement('span');
-                ripples.style.left = x + 'px';
-                ripples.style.top = y + 'px';
-                ripples.classList.add('ripple-effect'); // Asegúrate que esta clase esté en tu CSS
-                
-                this.appendChild(ripples);
-
-                setTimeout(() => {
-                    ripples.remove();
-                }, 600);
-            });
-        });
-
-        // Script para el CMS
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
-                    });
-                }
-            });
-        }
-    </script>
-
-    <style>
-        /* Estilo rápido para el efecto ripple que no puede faltar */
-        .ripple-effect {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            border-radius: 50%;
-            animation: ripple-animation 0.6s linear;
-        }
-
-        @keyframes ripple-animation {
-            0% { width: 0px; height: 0px; opacity: 0.5; }
-            100% { width: 500px; height: 500px; opacity: 0; }
-        }
-    </style>
+    <script src="/js/main.js"></script>
 </body>
 </html>
