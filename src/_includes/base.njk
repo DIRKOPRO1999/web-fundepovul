@@ -11,14 +11,14 @@
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
     
-    <meta name="description" content="Fundación Defensora de Poblaciones Vulnerables en Sucre. Proyectos sociales, educativos y ambientales.">
+    <meta name="description" content="Fundación Defensora de Poblaciones Vulnerables en Sucre.">
 </head>
 <body>
 
     {{ content | safe }}
 
-    <script src="/js/main.js"></script>
+    <script src="{{ '/js/main.js' | url }}"></script>
 </body>
 </html>
