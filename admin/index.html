@@ -7,5 +7,11 @@
   </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Listener de debug: registra mensajes postMessage desde el popup OAuth.
+    window.addEventListener('message', (e) => {
+      console.log('DEBUG OAuth message received:', e.origin, e.data);
+    });
+  </script>
 </body>
 </html>
