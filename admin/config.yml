@@ -2,9 +2,10 @@ backend:
   name: github
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
-  # Usar Pages Functions internas para evitar cross-origin popup issues.
-  # Las funciones están en: /functions/oauth
-  base_url: /functions/oauth
+  # Usar Pages Functions internas para OAuth.
+  # Auth endpoint relativo: functions/oauth/auth
+  base_url: https://web-fundepovul.pages.dev/functions/oauth
+  auth_endpoint: auth
 
 # Configuración de imágenes
 media_folder: "src/img"

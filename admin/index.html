@@ -10,34 +10,68 @@
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // Listener de debug + relay para mensajes OAuth desde el popup.
-    // - Acepta mensajes solo desde el mismo origen.
-    // - Guarda el token en sessionStorage para el admin.
-    // - Re-dispara dos tipos de `message` events en el mismo origen
-    //   para maximizar la compatibilidad con Decap/Netlify CMS.
-    window.addEventListener('message', (e) => {
+    // OAuth Message Handler: captura y procesa mensajes desde el popup de autenticación.
+    // Validaciones de seguridad:
+    // - Solo acepta mensajes desde el mismo origen (window.location.origin)
+    // - Valida estructura del mensaje
+    // - Almacena token en sessionStorage (no en localStorage por seguridad)
+    // - Re-dispara eventos para máxima compatibilidad con Decap CMS
+    
+    window.addEventListener('message', (event) => {
       try {
-        if (e.origin !== window.location.origin) return;
-        console.log('DEBUG OAuth message received:', e.origin, e.data);
-        const data = e.data || {};
-        const token = data.token || data.access_token || (data.payload && data.payload.token);
-        const provider = data.provider || 'github';
-        if (!token) return;
+        // Solo procesar mensajes desde el mismo origen
+        if (event.origin !== window.location.origin) {
+          console.warn('OAuth: mensaje rechazado (origen no coincide):', event.origin);
+          return;
+        }
 
-        // Guardar token temporalmente para que código del admin pueda recuperarlo si necesita
-        try { sessionStorage.setItem('decap-oauth-token', token); } catch (err) { /* silent */ }
+        const data = event.data || {};
+        
+        // Validar que sea un mensaje de OAuth
+        if (data.type !== 'decap-oauth' && data.type !== 'authorization_response') {
+          return;
+        }
 
-        // Crear payloads compatibles
-        const payload1 = { type: 'authorization_response', provider: provider, token: token };
-        const payload2 = { type: 'decap-oauth', provider: provider, token: token, status: 'success' };
+        console.log('[OAuth] Mensaje recibido:', { type: data.type, provider: data.provider, hasToken: !!data.token });
 
-        // Re-disparar como eventos Message (mismo origen)
-        window.dispatchEvent(new MessageEvent('message', { data: payload1, origin: window.location.origin }));
-        window.dispatchEvent(new MessageEvent('message', { data: payload2, origin: window.location.origin }));
+        // Si hay error, loguear pero no procesar el token
+        if (data.error) {
+          console.warn('[OAuth] Error en autenticación:', data.error);
+          return;
+        }
 
-        console.log('DEBUG OAuth relayed and stored token.');
+        const token = data.token || data.access_token;
+        if (!token) {
+          console.warn('[OAuth] Mensaje sin token');
+          return;
+        }
+
+        // Guardar el token en sessionStorage (temporal, limpiarse al cerrar la pestaña)
+        try {
+          sessionStorage.setItem('decap-oauth-token', token);
+          sessionStorage.setItem('decap-oauth-provider', data.provider || 'github');
+          console.log('[OAuth] Token almacenado en sessionStorage');
+        } catch (storageErr) {
+          console.warn('[OAuth] No se pudo escribir en sessionStorage:', storageErr.message);
+        }
+
+        // Re-disparar el mensaje para que Decap CMS lo capture (compatibilidad)
+        const decapMessage = {
+          type: 'decap-oauth',
+          provider: data.provider || 'github',
+          token: token,
+          status: 'success'
+        };
+        
+        window.dispatchEvent(new MessageEvent('message', {
+          data: decapMessage,
+          origin: window.location.origin,
+          source: window
+        }));
+
+        console.log('[OAuth] Flujo completado exitosamente');
       } catch (err) {
-        console.error('OAuth relay error', err);
+        console.error('[OAuth] Error al procesar mensaje:', err.message, err);
       }
     });
   </script>
