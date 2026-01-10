@@ -1,20 +1,111 @@
-/* Corrección para que el header se vea bien con el JS */
-header.active {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+/* ---------------------------------------------------------
+   VARIABLES Y RESET (PALETA GOLDEN HOUR)
+   --------------------------------------------------------- */
+:root {
+    --primary: #D69E2E; /* Dorado extraído del logo */
+    --primary-container: #FFF8E6;
+    --on-primary: #FFFFFF;
+    --secondary: #966F28;
+    
+    --background: #FDFCF8; /* Crema suave */
+    --surface: #FFFFFF;
+    --surface-variant: #F2F0EA;
+    
+    --text-main: #2D2A26; /* Café oscuro */
+    --text-body: #5F5B54; /* Gris cálido */
+    
+    --outline: #E0DCD0;
+    
+    --radius-sm: 12px;
+    --radius-md: 24px;
+    --radius-lg: 32px;
+    --radius-full: 999px;
+    
+    --shadow-1: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-2: 0 10px 15px -3px rgba(45, 42, 38, 0.1), 0 4px 6px -2px rgba(45, 42, 38, 0.05);
+    --shadow-hover: 0 20px 25px -5px rgba(214, 158, 46, 0.25), 0 10px 10px -5px rgba(214, 158, 46, 0.1);
 }
 
-/* Estilo para el ripple effect de los botones */
-.ripple {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    border-radius: 50%;
-    animation: ripple 0.6s linear;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--background);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-@keyframes ripple {
-    0% { width: 0px; height: 0px; opacity: 0.5; }
-    100% { width: 500px; height: 500px; opacity: 0; }
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: var(--text-main);
 }
+
+/* ---------------------------------------------------------
+   HEADER FLOTANTE
+   --------------------------------------------------------- */
+header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(253, 252, 248, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-full);
+    padding: 12px 24px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-1);
+}
+
+.logo-container { display: flex; align-items: center; gap: 12px; }
+.logo-container img { height: 40px; width: auto; }
+.logo-text { font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--primary); font-size: 1.2rem; }
+
+nav ul { display: flex; gap: 32px; }
+nav a { font-weight: 500; font-size: 0.95rem; color: var(--text-body); transition: color 0.3s; }
+nav a:hover { color: var(--primary); }
+
+/* ---------------------------------------------------------
+   HERO SECTION
+   --------------------------------------------------------- */
+#hero { padding-top: 160px; padding-bottom: 80px; min-height: 90vh; display: flex; align-items: center; }
+.hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; }
+.hero-text h1 span { color: var(--primary); }
+.hero-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    box-shadow: var(--shadow-2);
+    animation: morph 8s ease-in-out infinite;
+}
+
+@keyframes morph {
+    0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+    50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+}
+
+/* ---------------------------------------------------------
+   DASHBOARD LEGAL
+   --------------------------------------------------------- */
+#transparencia { padding: 100px 0; background-color: var(--surface-variant); border-radius: var(--radius-lg); margin: 40px 24px; }
+.legal-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; padding: 0 24px; }
+.legal-card { background: var(--surface); padding: 32px; border-radius: var(--radius-md); box-shadow: var(--shadow-1); border-left: 4px solid var(--primary); }
+
+/* UTILIDADES */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.btn { display: inline-flex; padding: 12px 32px; border-radius: var(--radius-full); font-family: 'Outfit', sans-serif; transition: all 0.3s; gap: 8px; }
+.btn-primary { background: var(--primary); color: white; }
