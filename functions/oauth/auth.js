@@ -25,11 +25,14 @@ export async function onRequest(context) {
 
   const authUrl = `https://github.com/login/oauth/authorize?${params.toString()}`;
 
-  // Guardar state en cookie para validación posterior
+  // Devolver una pequeña página que guarda la cookie y hace la redirección por cliente.
+  // Esto evita que Pages renderice la página estática en el popup en lugar de redirigir.
   const headers = new Headers();
-  headers.set('Location', authUrl);
-  // cookie segura, duración breve
+  headers.append('Content-Type', 'text/html; charset=utf-8');
   headers.append('Set-Cookie', `oauth_state=${state}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`);
 
-  return new Response(null, { status: 302, headers });
+  const safeAuthUrl = authUrl.replace(/</g, '%3C');
+  const html = `<!doctype html><meta charset="utf-8"><title>Redirecting...</title><script>window.location.href = "${safeAuthUrl}";</script><noscript><meta http-equiv="refresh" content="0;url=${safeAuthUrl}" /></noscript>`;
+
+  return new Response(html, { status: 200, headers });
 }
