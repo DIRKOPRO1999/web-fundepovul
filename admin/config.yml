@@ -1,13 +1,10 @@
 backend:
   name: github
-  # Asegúrate que este sea exactamente tu usuario y repo en GitHub
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
-  
-  # Tu puente de seguridad (Worker)
   base_url: https://oauth-fundepovul.sucre19992.workers.dev
   auth_endpoint: auth
-
+  site_domain: web-fundepovul.pages.dev
 # Configuración de imágenes
 media_folder: "src/img"
 public_folder: "/img"
@@ -63,3 +60,4 @@ collections:
               - {label: "Teléfono / WhatsApp", name: "telefono", widget: "string"}
               - {label: "Correo Electrónico", name: "email", widget: "string"}
               - {label: "Dirección Física", name: "direccion", widget: "string"}
+
