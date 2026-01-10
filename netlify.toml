@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+# Asegura que las rutas funcionen bien
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de seguridad básicos
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
