@@ -1,0 +1,119 @@
+---
+layout: base.njk
+title: Inicio
+---
+
+<header class="reveal active">
+    <div class="logo-container">
+        <img src="https://i.imgur.com/OrmuxDK.png" alt="Logo Fundepovul">
+        <span class="logo-text">FUNDEPOVUL</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#ejes">Proyectos</a></li>
+            <li><a href="#transparencia">Transparencia</a></li>
+        </ul>
+    </nav>
+    <button class="mobile-menu-btn" aria-label="Abrir menú">
+        <span class="material-symbols-rounded">menu</span>
+    </button>
+</header>
+
+<main>
+    <section id="hero" class="container">
+        <div class="hero-content">
+            <div class="hero-text reveal">
+                <h1>{{ home.hero_header.titulo }}</h1>
+                <p>{{ home.hero_header.descripcion }}</p>
+                
+                <div class="hero-buttons">
+                    <a href="#ejes" class="btn btn-primary">
+                        {{ home.hero_header.btn_primary }}
+                        <span class="material-symbols-rounded">arrow_forward</span>
+                    </a>
+                    <a href="#transparencia" class="btn btn-secondary">
+                        Saber más
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper reveal">
+                <img src="{{ home.hero_header.imagen }}" alt="FUNDEPOVUL en acción" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="transparencia">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="subtitle">CONFIANZA Y LEGALIDAD</span>
+                <h2>Transparencia Institucional</h2>
+                <p>Operamos bajo estricta vigilancia de la Gobernación de Sucre.</p>
+            </div>
+
+            <div class="legal-dashboard">
+                <div class="legal-card reveal">
+                    <span class="material-symbols-rounded legal-icon">verified_user</span>
+                    <div class="legal-label">Razón Social</div>
+                    <div class="legal-value">FUNDACION DEFENSORA DE POBLACIONES VULNERABLES</div>
+                </div>
+                <div class="legal-card reveal">
+                    <span class="material-symbols-rounded legal-icon">badge</span>
+                    <div class="legal-label">NIT</div>
+                    <div class="legal-value">{{ home.legal.nit }}</div>
+                </div>
+                <div class="legal-card reveal">
+                    <span class="material-symbols-rounded legal-icon">gavel</span>
+                    <div class="legal-label">Matrícula</div>
+                    <div class="legal-value">{{ home.legal.matricula }}</div>
+                </div>
+                <div class="legal-card reveal">
+                    <span class="material-symbols-rounded legal-icon">person_apron</span>
+                    <div class="legal-label">Representante</div>
+                    <div class="legal-value">{{ home.legal.representante }}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ejes" class="container">
+        <div class="section-header reveal">
+            <h2>Nuestros Ejes de Acción</h2>
+            <p>Abordamos las necesidades de la comunidad integralmente.</p>
+        </div>
+        <div class="cards-grid">
+            <div class="axis-card reveal">
+                <div class="axis-icon-bg"><span class="material-symbols-rounded">school</span></div>
+                <h3>Educación</h3>
+                <p>Talleres y capacitaciones para el desarrollo.</p>
+            </div>
+             <div class="axis-card reveal">
+                <div class="axis-icon-bg"><span class="material-symbols-rounded">diversity_1</span></div>
+                <h3>Desarrollo Social</h3>
+                <p>Apoyo a población vulnerable y víctimas.</p>
+            </div>
+            </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>FUNDEPOVUL</h4>
+                <p>Sucre, Colombia.</p>
+            </div>
+            <div>
+                <h5>Contacto</h5>
+                <ul class="footer-contact-list">
+                    <li>{{ home.contacto.direccion }}</li>
+                    <li>{{ home.contacto.email }}</li>
+                    <li>{{ home.contacto.telefono }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FUNDEPOVUL.</p>
+        </div>
+    </div>
+</footer>
