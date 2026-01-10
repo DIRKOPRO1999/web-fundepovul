@@ -10,9 +10,35 @@
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // Listener de debug: registra mensajes postMessage desde el popup OAuth.
+    // Listener de debug + relay para mensajes OAuth desde el popup.
+    // - Acepta mensajes solo desde el mismo origen.
+    // - Guarda el token en sessionStorage para el admin.
+    // - Re-dispara dos tipos de `message` events en el mismo origen
+    //   para maximizar la compatibilidad con Decap/Netlify CMS.
     window.addEventListener('message', (e) => {
-      console.log('DEBUG OAuth message received:', e.origin, e.data);
+      try {
+        if (e.origin !== window.location.origin) return;
+        console.log('DEBUG OAuth message received:', e.origin, e.data);
+        const data = e.data || {};
+        const token = data.token || data.access_token || (data.payload && data.payload.token);
+        const provider = data.provider || 'github';
+        if (!token) return;
+
+        // Guardar token temporalmente para que código del admin pueda recuperarlo si necesita
+        try { sessionStorage.setItem('decap-oauth-token', token); } catch (err) { /* silent */ }
+
+        // Crear payloads compatibles
+        const payload1 = { type: 'authorization_response', provider: provider, token: token };
+        const payload2 = { type: 'decap-oauth', provider: provider, token: token, status: 'success' };
+
+        // Re-disparar como eventos Message (mismo origen)
+        window.dispatchEvent(new MessageEvent('message', { data: payload1, origin: window.location.origin }));
+        window.dispatchEvent(new MessageEvent('message', { data: payload2, origin: window.location.origin }));
+
+        console.log('DEBUG OAuth relayed and stored token.');
+      } catch (err) {
+        console.error('OAuth relay error', err);
+      }
     });
   </script>
 </body>
