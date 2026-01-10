@@ -1,0 +1,32 @@
+/* --- Estilos para el JS nuevo --- */
+
+/* 1. Para el Header al hacer scroll */
+header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 10px 0; /* Un poco más compacto */
+}
+
+/* 2. Para las animaciones Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. Menú Móvil (Asegúrate que tu CSS tenga esto para móviles) */
+@media (max-width: 768px) {
+    nav {
+        /* Tus estilos actuales de menú oculto */
+        display: none; 
+    }
+    nav.active {
+        display: block; /* O flex, según tu diseño original */
+        /* Estilos para mostrar el menú */
+    }
+}
