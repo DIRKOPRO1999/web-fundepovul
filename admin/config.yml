@@ -3,7 +3,6 @@ backend:
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
   # Usar Pages Functions internas para OAuth.
-  # Auth endpoint relativo: functions/oauth/auth
   base_url: https://web-fundepovul.pages.dev/functions/oauth
   auth_endpoint: auth
 
