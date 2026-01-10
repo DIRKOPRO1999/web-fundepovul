@@ -3,37 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gestor de Contenidos - Fundepovul</title>
+  <title>Admin Fundepovul</title>
   
   <link href="./config.yml" type="text/yaml" rel="cms-config-url" />
-
-  <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
-  
-  <style>
-    body { font-family: sans-serif; }
-    #nc-root { height: 100vh; }
-  </style>
 </head>
 <body>
+  <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+  
   <script>
-    // 3. Registrar tus estilos visuales
-    CMS.registerPreviewStyle("/css/style.css");
-    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap");
-    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0");
-
-    // 4. Detector de errores (si sigue blanco, abre la consola F12 y esto nos dirá qué pasa)
-    window.onerror = function(msg, url, line) {
-      document.body.innerHTML = `
-        <div style="padding: 20px; color: red; text-align: center;">
-            <h2>⚠️ Error al cargar el panel</h2>
-            <p><strong>Mensaje:</strong> ${msg}</p>
-            <p><strong>Archivo:</strong> ${url}</p>
-            <p><strong>Línea:</strong> ${line}</p>
-            <hr>
-            <p>Por favor, verifica que el archivo <code>admin/config.yml</code> no tenga errores de indentación.</p>
-        </div>
-      `;
-    };
+    // Verificamos que el CMS exista antes de ejecutar nada
+    if (window.CMS) {
+      CMS.registerPreviewStyle("/css/style.css");
+      CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap");
+      CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0");
+    } else {
+      console.error("El CMS no cargó correctamente.");
+    }
   </script>
 </body>
 </html>
