@@ -1,13 +1,18 @@
 backend:
   name: github
-  repo: DIRKOPRO1999/web-fundepovul # <--- Asegúrate que este sea tu usuario/repo correcto
+  # Asegúrate que este sea exactamente tu usuario y repo en GitHub
+  repo: DIRKOPRO1999/web-fundepovul
   branch: main
-  # ⚠️ AQUÍ ESTABA EL ERROR. ESTA ES TU URL REAL:
+  
+  # Tu puente de seguridad (Worker)
   base_url: https://oauth-fundepovul.sucre19992.workers.dev
   auth_endpoint: auth
 
+# Configuración de imágenes
 media_folder: "src/img"
 public_folder: "/img"
+
+# URL de tu sitio (para previsualizaciones)
 site_url: https://web-fundepovul.pages.dev
 
 collections:
@@ -18,27 +23,43 @@ collections:
         label: "Página de Inicio"
         name: "inicio"
         fields:
-          - {label: "--- SECCIÓN HERO ---", name: "hero_header", widget: "object", fields: [
-              {label: "Título Principal", name: "titulo", widget: "string"},
-              {label: "Descripción", name: "descripcion", widget: "text"},
-              {label: "Texto Botón", name: "btn_primary", widget: "string"},
-              {label: "Imagen Portada", name: "imagen", widget: "image"}
-            ]}
-          
-          - {label: "--- EJES DE ACCIÓN ---", name: "ejes", widget: "list", fields: [
-              {label: "Icono (Material Symbols)", name: "icono", widget: "string"},
-              {label: "Título", name: "titulo", widget: "string"},
-              {label: "Descripción", name: "descripcion", widget: "text"}
-            ]}
+          # --- SECCIÓN HERO (Portada) ---
+          - label: "--- SECCIÓN HERO ---"
+            name: "hero_header"
+            widget: "object"
+            collapsed: false
+            fields:
+              - {label: "Título Principal (Acepta HTML)", name: "titulo", widget: "string"}
+              - {label: "Descripción", name: "descripcion", widget: "text"}
+              - {label: "Texto Botón", name: "btn_primary", widget: "string"}
+              - {label: "Imagen Portada", name: "imagen", widget: "image"}
 
-          - {label: "--- LEGAL ---", name: "legal", widget: "object", fields: [
-              {label: "NIT", name: "nit", widget: "string"},
-              {label: "Matrícula", name: "matricula", widget: "string"},
-              {label: "Representante", name: "representante", widget: "string"}
-            ]}
-            
-          - {label: "--- CONTACTO ---", name: "contacto", widget: "object", fields: [
-              {label: "Teléfono", name: "telefono", widget: "string"},
-              {label: "Email", name: "email", widget: "string"},
-              {label: "Dirección", name: "direccion", widget: "string"}
-            ]}
+          # --- EJES DE ACCIÓN (Proyectos) ---
+          - label: "--- EJES DE ACCIÓN ---"
+            name: "ejes"
+            widget: "list"
+            collapsed: true
+            fields:
+              - {label: "Título del Eje", name: "titulo", widget: "string"}
+              - {label: "Descripción Corta", name: "descripcion", widget: "text"}
+              - {label: "Icono (Material Symbols)", name: "icono", widget: "string", hint: "Busca nombres en fonts.google.com/icons"}
+
+          # --- INFO LEGAL ---
+          - label: "--- INFO LEGAL ---"
+            name: "legal"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "NIT", name: "nit", widget: "string"}
+              - {label: "Matrícula Mercantil", name: "matricula", widget: "string"}
+              - {label: "Representante Legal", name: "representante", widget: "string"}
+
+          # --- CONTACTO ---
+          - label: "--- CONTACTO ---"
+            name: "contacto"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Teléfono / WhatsApp", name: "telefono", widget: "string"}
+              - {label: "Correo Electrónico", name: "email", widget: "string"}
+              - {label: "Dirección Física", name: "direccion", widget: "string"}
