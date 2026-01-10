@@ -3,9 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gestor de Contenidos - Fundepovul</title>
-  </head>
+  <title>Admin Fundepovul</title>
+  <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+</head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Conectar tus estilos CSS al panel de administración
+    CMS.registerPreviewStyle("/css/style.css");
+    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap");
+    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0");
+  </script>
 </body>
 </html>
