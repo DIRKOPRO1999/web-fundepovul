@@ -4,12 +4,12 @@ backend:
   branch: main
   base_url: https://oauth-fundepovul.sucre19992.workers.dev
   auth_endpoint: auth
-  site_domain: web-fundepovul.pages.dev
+
 # Configuración de imágenes
 media_folder: "src/img"
 public_folder: "/img"
 
-# URL de tu sitio (para previsualizaciones)
+# URL para ver el sitio mientras editas
 site_url: https://web-fundepovul.pages.dev
 
 collections:
@@ -31,16 +31,6 @@ collections:
               - {label: "Texto Botón", name: "btn_primary", widget: "string"}
               - {label: "Imagen Portada", name: "imagen", widget: "image"}
 
-          # --- EJES DE ACCIÓN (Proyectos) ---
-          - label: "--- EJES DE ACCIÓN ---"
-            name: "ejes"
-            widget: "list"
-            collapsed: true
-            fields:
-              - {label: "Título del Eje", name: "titulo", widget: "string"}
-              - {label: "Descripción Corta", name: "descripcion", widget: "text"}
-              - {label: "Icono (Material Symbols)", name: "icono", widget: "string", hint: "Busca nombres en fonts.google.com/icons"}
-
           # --- INFO LEGAL ---
           - label: "--- INFO LEGAL ---"
             name: "legal"
@@ -61,3 +51,12 @@ collections:
               - {label: "Correo Electrónico", name: "email", widget: "string"}
               - {label: "Dirección Física", name: "direccion", widget: "string"}
 
+          # --- EJES DE ACCIÓN (Proyectos) ---
+          - label: "--- EJES DE ACCIÓN ---"
+            name: "ejes"
+            widget: "list"
+            collapsed: true
+            fields:
+              - {label: "Título del Eje", name: "titulo", widget: "string"}
+              - {label: "Descripción Corta", name: "descripcion", widget: "text"}
+              - {label: "Icono (Material Symbols)", name: "icono", widget: "string", hint: "Busca nombres en fonts.google.com/icons"}
