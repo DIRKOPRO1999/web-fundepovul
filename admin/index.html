@@ -74,9 +74,9 @@
 
         // Guardar el token en localStorage (persistente)
         try {
-          localStorage.setItem('netlify-cms-github-token', token);
+          localStorage.setItem('github-token', token);
           localStorage.setItem('decap-oauth-provider', data.provider || 'github');
-          console.log('[OAuth] Token almacenado en localStorage como netlify-cms-github-token');
+          console.log('[OAuth] Token almacenado en localStorage como github-token');
         } catch (storageErr) {
           console.warn('[OAuth] No se pudo escribir en localStorage:', storageErr.message);
         }
@@ -95,7 +95,7 @@
     // Helper para centralizar manejo de token
     function handleToken(token, provider) {
       try {
-        localStorage.setItem('netlify-cms-github-token', token);
+        localStorage.setItem('github-token', token);
         localStorage.setItem('decap-oauth-provider', provider || 'github');
         console.log('[OAuth] Token almacenado en localStorage (handler)');
       } catch (e) {
