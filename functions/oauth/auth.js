@@ -20,8 +20,8 @@ export async function onRequest(context) {
   crypto.getRandomValues(array);
   const state = Array.from(array).map(b => b.toString(16).padStart(2, '0')).join('');
 
-  // redirect_uri debe apuntar a /functions/oauth/callback
-  const redirectUri = `${origin}/functions/oauth/callback`;
+  // redirect_uri debe apuntar a /oauth/callback
+  const redirectUri = `${origin}/oauth/callback`;
 
   const params = new URLSearchParams({
     client_id: clientId,
