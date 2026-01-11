@@ -2,8 +2,8 @@ backend:
   name: github
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
-  base_url: https://web-fundepovul.pages.dev
-  auth_endpoint: oauth/auth
+  base_url: https://oauth-fundepovul.sucre19992.workers.dev
+  auth_endpoint: auth
   site_domain: https://web-fundepovul.pages.dev
 
 # Configuración de imágenes

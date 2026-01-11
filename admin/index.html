@@ -19,8 +19,9 @@
     
     window.addEventListener('message', (event) => {
       try {
-        // Solo procesar mensajes desde el mismo origen
-        if (event.origin !== window.location.origin) {
+        // Solo procesar mensajes desde el mismo origen o desde el Worker OAuth
+        const allowedOrigins = [window.location.origin, 'https://oauth-fundepovul.sucre19992.workers.dev'];
+        if (!allowedOrigins.includes(event.origin)) {
           console.warn('OAuth: mensaje rechazado (origen no coincide):', event.origin);
           return;
         }
