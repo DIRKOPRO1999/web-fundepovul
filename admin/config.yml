@@ -2,9 +2,11 @@ backend:
   name: github
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
+  client_id: TU_GITHUB_CLIENT_ID_AQUI
   site_domain: https://web-fundepovul.pages.dev
 
-# Configuración de imágenes
+# URL para ver el sitio mientras editas
+site_url: https://web-fundepovul.pages.dev
 media_folder: "src/img"
 public_folder: "/img"
 
