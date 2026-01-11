@@ -6,6 +6,7 @@ backend:
   # Cloudflare Pages Functions mapea: functions/oauth/auth.js → /oauth/auth
   base_url: https://web-fundepovul.pages.dev
   auth_endpoint: oauth/auth
+  site_domain: web-fundepovul.pages.dev
 
 # Configuración de imágenes
 media_folder: "src/img"

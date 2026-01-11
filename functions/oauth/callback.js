@@ -39,7 +39,7 @@ export async function onRequest(context) {
         client_id: env.GITHUB_CLIENT_ID,
         client_secret: env.GITHUB_CLIENT_SECRET,
         code: code,
-        redirect_uri: `${url.origin}/functions/oauth/callback`,
+        redirect_uri: `${url.origin}/oauth/callback`,
         state: state
       })
     });
