@@ -98,6 +98,10 @@
         localStorage.setItem('github-token', token);
         localStorage.setItem('decap-oauth-provider', provider || 'github');
         console.log('[OAuth] Token almacenado en localStorage (handler)');
+        // Recargar para que Decap detecte el token
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } catch (e) {
         console.warn('[OAuth] No se pudo guardar token en localStorage', e.message);
       }
