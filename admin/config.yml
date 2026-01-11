@@ -2,7 +2,8 @@ backend:
   name: github
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
-  client_id: TU_GITHUB_CLIENT_ID_AQUI
+  client_id: Ov23liYErRUMyxlGrJB8
+  client_secret: 866a75599dc841b481b561854861324d3b5c67b2
   site_domain: https://web-fundepovul.pages.dev
 
 # URL para ver el sitio mientras editas
