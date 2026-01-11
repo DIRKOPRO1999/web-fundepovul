@@ -61,7 +61,7 @@
         console.log('[OAuth] Mensaje recibido:', { type: data.type, provider: data.provider, hasToken: !!data.token });
 
         // Si ya hay token, ignorar (evitar loops)
-        if (localStorage.getItem('github-token')) {
+        if (localStorage.getItem('netlify-cms-github-token')) {
           console.log('[OAuth] Token ya presente, ignorando mensaje');
           return;
         }
@@ -80,9 +80,9 @@
 
         // Guardar el token en localStorage (persistente)
         try {
-          localStorage.setItem('github-token', token);
+          localStorage.setItem('netlify-cms-github-token', token);
           localStorage.setItem('decap-oauth-provider', data.provider || 'github');
-          console.log('[OAuth] Token almacenado en localStorage como github-token');
+          console.log('[OAuth] Token almacenado en localStorage como netlify-cms-github-token');
         } catch (storageErr) {
           console.warn('[OAuth] No se pudo escribir en localStorage:', storageErr.message);
         }
@@ -101,12 +101,12 @@
     // Helper para centralizar manejo de token
     function handleToken(token, provider) {
       // Si ya hay token, ignorar
-      if (localStorage.getItem('github-token')) {
+      if (localStorage.getItem('netlify-cms-github-token')) {
         console.log('[OAuth] Token ya presente, ignorando');
         return;
       }
       try {
-        localStorage.setItem('github-token', token);
+        localStorage.setItem('netlify-cms-github-token', token);
         localStorage.setItem('decap-oauth-provider', provider || 'github');
         console.log('[OAuth] Token almacenado en localStorage (handler)');
         // Recargar para que Decap detecte el token
