@@ -81,6 +81,11 @@
         }
 
         console.log('[OAuth] Flujo completado exitosamente');
+
+        // Recargar la página para que Decap CMS detecte el token y autentique
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } catch (err) {
         console.error('[OAuth] Error al procesar mensaje:', err.message, err);
       }
