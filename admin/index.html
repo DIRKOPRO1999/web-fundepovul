@@ -60,6 +60,12 @@
 
         console.log('[OAuth] Mensaje recibido:', { type: data.type, provider: data.provider, hasToken: !!data.token });
 
+        // Si ya hay token, ignorar (evitar loops)
+        if (localStorage.getItem('github-token')) {
+          console.log('[OAuth] Token ya presente, ignorando mensaje');
+          return;
+        }
+
         // Si hay error, loguear pero no procesar el token
         if (data.error) {
           console.warn('[OAuth] Error en autenticación:', data.error);
@@ -94,6 +100,11 @@
     
     // Helper para centralizar manejo de token
     function handleToken(token, provider) {
+      // Si ya hay token, ignorar
+      if (localStorage.getItem('github-token')) {
+        console.log('[OAuth] Token ya presente, ignorando');
+        return;
+      }
       try {
         localStorage.setItem('github-token', token);
         localStorage.setItem('decap-oauth-provider', provider || 'github');
