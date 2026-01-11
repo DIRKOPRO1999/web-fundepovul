@@ -9,5 +9,98 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // OAuth Message Handler: captura y procesa mensajes desde el popup de autenticación.
+    // Validaciones de seguridad:
+    // - Solo acepta mensajes desde el mismo origen (window.location.origin)
+    // - Valida estructura del mensaje
+    // - Almacena token en localStorage (persistente)
+    // - Evita loops recursivos
+    
+    window.addEventListener('message', (event) => {
+      try {
+        // Solo procesar mensajes desde el mismo origen
+        if (event.origin !== window.location.origin) {
+          console.warn('OAuth: mensaje rechazado (origen no coincide):', event.origin);
+          return;
+        }
+
+        // Evitar procesar mensajes que nosotros mismos disparamos
+        if (event.source === window) {
+          return;
+        }
+
+        const data = event.data || {};
+        
+        // Si el mensaje viene como STRING legacy: 'authorization:provider:status:JSON'
+        if (typeof event.data === 'string' && event.data.startsWith('authorization:')) {
+          try {
+            const parts = event.data.split(':');
+            // parts = ['authorization', provider, status, payloadJSON]
+            const provider = parts[1] || 'github';
+            const status = parts[2] || '';
+            const payload = parts.slice(3).join(':');
+            const parsed = JSON.parse(payload || '{}');
+            if (status === 'success' && parsed.token) {
+              handleToken(parsed.token, provider);
+            } else {
+              console.warn('[OAuth] Legacy mensaje de error:', parsed);
+            }
+          } catch (e) {
+            console.warn('[OAuth] No se pudo parsear legacy message', e);
+          }
+          return;
+        }
+
+        // Validar que sea un mensaje de OAuth (objeto)
+        if (data.type !== 'decap-oauth' && data.type !== 'authorization' && data.type !== 'authorization_response') {
+          return;
+        }
+
+        console.log('[OAuth] Mensaje recibido:', { type: data.type, provider: data.provider, hasToken: !!data.token });
+
+        // Si hay error, loguear pero no procesar el token
+        if (data.error) {
+          console.warn('[OAuth] Error en autenticación:', data.error);
+          return;
+        }
+
+        const token = data.token || data.access_token;
+        if (!token) {
+          console.warn('[OAuth] Mensaje sin token');
+          return;
+        }
+
+        // Guardar el token en localStorage (persistente)
+        try {
+          localStorage.setItem('netlify-cms-github-token', token);
+          localStorage.setItem('decap-oauth-provider', data.provider || 'github');
+          console.log('[OAuth] Token almacenado en localStorage como netlify-cms-github-token');
+        } catch (storageErr) {
+          console.warn('[OAuth] No se pudo escribir en localStorage:', storageErr.message);
+        }
+
+        console.log('[OAuth] Flujo completado exitosamente');
+
+        // Recargar la página para que Decap CMS detecte el token y autentique
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } catch (err) {
+        console.error('[OAuth] Error al procesar mensaje:', err.message, err);
+      }
+    });
+    
+    // Helper para centralizar manejo de token
+    function handleToken(token, provider) {
+      try {
+        localStorage.setItem('netlify-cms-github-token', token);
+        localStorage.setItem('decap-oauth-provider', provider || 'github');
+        console.log('[OAuth] Token almacenado en localStorage (handler)');
+      } catch (e) {
+        console.warn('[OAuth] No se pudo guardar token en localStorage', e.message);
+      }
+    }
+  </script>
 </body>
 </html>

@@ -2,8 +2,8 @@ backend:
   name: github
   repo: DIRKOPRO1999/web-fundepovul
   branch: main
-  client_id: Ov23liYErRUMyxlGrJB8
-  client_secret: 866a75599dc841b481b561854861324d3b5c67b2
+  base_url: https://web-fundepovul.pages.dev
+  auth_endpoint: oauth/auth
   site_domain: https://web-fundepovul.pages.dev
 
 # Configuración de imágenes
