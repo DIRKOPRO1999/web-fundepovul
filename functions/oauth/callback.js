@@ -83,8 +83,8 @@ export async function onRequest(context) {
         // Enviar mensaje al window.opener (si existe)
         if (window.opener) {
           const message = token 
-            ? { type: 'decap-oauth', provider: 'github', token: token, status: 'success' }
-            : { type: 'decap-oauth', provider: 'github', error: error || 'unknown_error', status: 'error' };
+            ? { type: 'authorization', provider: 'github', token: token, status: 'success' }
+            : { type: 'authorization', provider: 'github', error: error || 'unknown_error', status: 'error' };
 
           // Enviar objeto (nuevo formato)
           window.opener.postMessage(message, origin);
