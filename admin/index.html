@@ -71,13 +71,13 @@
           return;
         }
 
-        // Guardar el token en sessionStorage (temporal, limpiarse al cerrar la pestaña)
+        // Guardar el token en localStorage (persistente)
         try {
-          sessionStorage.setItem('decap-oauth-token', token);
-          sessionStorage.setItem('decap-oauth-provider', data.provider || 'github');
-          console.log('[OAuth] Token almacenado en sessionStorage');
+          localStorage.setItem('netlify-cms-github-token', token);
+          localStorage.setItem('decap-oauth-provider', data.provider || 'github');
+          console.log('[OAuth] Token almacenado en localStorage como netlify-cms-github-token');
         } catch (storageErr) {
-          console.warn('[OAuth] No se pudo escribir en sessionStorage:', storageErr.message);
+          console.warn('[OAuth] No se pudo escribir en localStorage:', storageErr.message);
         }
 
         console.log('[OAuth] Flujo completado exitosamente');
@@ -89,11 +89,11 @@
     // Helper para centralizar manejo de token
     function handleToken(token, provider) {
       try {
-        sessionStorage.setItem('decap-oauth-token', token);
-        sessionStorage.setItem('decap-oauth-provider', provider || 'github');
-        console.log('[OAuth] Token almacenado en sessionStorage (handler)');
+        localStorage.setItem('netlify-cms-github-token', token);
+        localStorage.setItem('decap-oauth-provider', provider || 'github');
+        console.log('[OAuth] Token almacenado en localStorage (handler)');
       } catch (e) {
-        console.warn('[OAuth] No se pudo guardar token en sessionStorage', e.message);
+        console.warn('[OAuth] No se pudo guardar token en localStorage', e.message);
       }
     }
   </script>
