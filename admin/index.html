@@ -25,6 +25,11 @@
           return;
         }
 
+        // Evitar procesar mensajes que nosotros mismos disparamos
+        if (event.source === window) {
+          return;
+        }
+
         const data = event.data || {};
         
         // Si el mensaje viene como STRING legacy: 'authorization:provider:status:JSON'
@@ -48,7 +53,7 @@
         }
 
         // Validar que sea un mensaje de OAuth (objeto)
-        if (data.type !== 'decap-oauth' && data.type !== 'authorization_response') {
+        if (data.type !== 'decap-oauth' && data.type !== 'authorization' && data.type !== 'authorization_response') {
           return;
         }
 
@@ -75,20 +80,6 @@
           console.warn('[OAuth] No se pudo escribir en sessionStorage:', storageErr.message);
         }
 
-        // Re-disparar el mensaje para que Decap CMS lo capture (compatibilidad)
-        const decapMessage = {
-          type: 'decap-oauth',
-          provider: data.provider || 'github',
-          token: token,
-          status: 'success'
-        };
-        
-        window.dispatchEvent(new MessageEvent('message', {
-          data: decapMessage,
-          origin: window.location.origin,
-          source: window
-        }));
-
         console.log('[OAuth] Flujo completado exitosamente');
       } catch (err) {
         console.error('[OAuth] Error al procesar mensaje:', err.message, err);
@@ -104,9 +95,6 @@
       } catch (e) {
         console.warn('[OAuth] No se pudo guardar token en sessionStorage', e.message);
       }
-
-      const decapMessage = { type: 'decap-oauth', provider: provider || 'github', token: token, status: 'success' };
-      window.dispatchEvent(new MessageEvent('message', { data: decapMessage, origin: window.location.origin }));
     }
   </script>
 </body>
